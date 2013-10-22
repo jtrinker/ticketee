@@ -1,2 +1,5 @@
-<h1>Tickets#show</h1>
-<p>Find me in app/views/tickets/show.html.erb</p>
+<div id="ticket">
+	<h2><%= @ticket.title %></h2>
+	<!-- simple_format converts line breaks entered into text field into html breaks -->
+	<%= simple_format(@ticket.description) %>
+</div>
