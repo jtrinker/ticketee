@@ -1,5 +1,5 @@
 Ticketee::Application.routes.draw do
   root "projects#index"
 
-  resources :projects, only: [:new, :index, :create, :show]
+  resources :projects, only: [:new, :index, :create, :show, :edit, :update]
 end
