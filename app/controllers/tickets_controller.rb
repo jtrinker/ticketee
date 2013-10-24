@@ -4,6 +4,8 @@ class TicketsController < ApplicationController
 	# :set_ticket finds the associated ticket within the scope of the project so we
 	# we don't have to do @ticket = @project.tickets... for all the actions
 	before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :only_creator_can_edit, only: [:edit, :update, :destroy]
 
   def index
   end
@@ -14,6 +16,7 @@ class TicketsController < ApplicationController
 
   def create
   	@ticket = @project.tickets.build(ticket_params)
+    @ticket.user = current_user
   	if @ticket.save
   		flash[:notice] = "Ticket has been created."
   		redirect_to project_ticket_path(@project, @ticket)
@@ -49,7 +52,7 @@ class TicketsController < ApplicationController
   private
 
   	def ticket_params
-  		params.require(:ticket).permit(:title, :description)
+  		params.require(:ticket).permit(:title, :description, :user_id)
   	end
 
   	def set_project
@@ -61,4 +64,11 @@ class TicketsController < ApplicationController
   	def set_ticket
   		@ticket = @project.tickets.find(params[:id])
   	end
+
+    def only_creator_can_edit
+      if @ticket.user.id != current_user.id
+        flash[:error] = "You did not create this ticket."
+        redirect_to @project
+      end
+    end
 end

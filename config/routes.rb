@@ -1,8 +1,5 @@
 Ticketee::Application.routes.draw do
-  get "tickets/index"
-  get "tickets/new"
-  get "tickets/create"
-  get "tickets/show"
+  devise_for :users
   root "projects#index"
 
   resources :projects do
