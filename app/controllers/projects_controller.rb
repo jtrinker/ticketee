@@ -59,13 +59,4 @@ class ProjectsController < ApplicationController
       redirect_to projects_path
     end
 
-    def authorize_admin!
-      user_signed_in?
-
-      unless current_user.admin?
-        flash[:alert] = "You must be an admin to do that"
-        redirect_to root_path
-      end
-    end
-
 end
