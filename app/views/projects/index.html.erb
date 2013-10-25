@@ -5,4 +5,7 @@
 	<% end %>
 </ul>
 
-<%= link_to "New Project", new_project_path %>
+<!-- better to put logic into helpers instead of putting logic directly into view -->
+<% admins_only do %>
+	<%= link_to "New Project", new_project_path %>
+<% end %>
