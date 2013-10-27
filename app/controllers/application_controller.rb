@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+    # put this in application controller because we're going to use in lots of places
   	def authorize_admin!
       user_signed_in?
 

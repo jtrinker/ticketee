@@ -13,6 +13,7 @@
 <%= link_to "New Ticket", new_project_ticket_path(@project) %>
 
 <% admins_only do %>
+	<!-- this is the code that gets sent to &block -->
 	<%= link_to "Edit Project", edit_project_path(@project) %>
 	<%= link_to "Delete Project", 
 				project_path(@project),

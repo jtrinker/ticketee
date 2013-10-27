@@ -6,6 +6,7 @@
 </ul>
 
 <!-- better to put logic into helpers instead of putting logic directly into view -->
+<!-- this method takes a block and if current_user is admin, run the code inside block -->
 <% admins_only do %>
 	<%= link_to "New Project", new_project_path %>
 <% end %>
