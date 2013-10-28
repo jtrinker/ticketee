@@ -1,8 +1,12 @@
 class Admin::UsersController < Admin::BaseController
+	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
   	# look into this
   	@users = User.order(:email)
+  end
+
+  def show
   end
 
   def new
@@ -20,10 +24,38 @@ class Admin::UsersController < Admin::BaseController
   	end
   end
 
+  def edit
+  end
+
+  def update
+  	if @user.update(user_params)
+  		flash[:notice] = "User has been updated."
+  		redirect_to admin_users_path
+  	else
+  		flash[:alert] = "User has not been updated."
+  		render action: "edit"
+  	end
+  end
+
+  def destroy
+  	if @user == current_user
+  		flash[:alert] = "You cannot delete yourself!"
+  	else
+	  	@user.destroy
+	  	flash[:notice] = "User has been deleted."
+	  end
+
+	  redirect_to admin_users_path
+  end
+
   private
 
   	def user_params
-  		params.require(:user).permit(:email, :password, :password_confirmation)
+  		params.require(:user).permit(:email, :password, :password_confirmation, :admin)
+  	end
+
+  	def set_user
+  		@user = User.find(params[:id])
   	end
 
 end
