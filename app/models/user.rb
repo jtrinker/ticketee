@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
 
   def to_s
+  	# print email; if admin? print "Admin" else print "User"
   	"#{email} (#{admin? ? "Admin" : "User"})"
   end
 end

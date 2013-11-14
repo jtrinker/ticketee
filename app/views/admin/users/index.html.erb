@@ -1,7 +1,7 @@
 <%= link_to "New User", new_admin_user_path %>
 <ul id="users">
 	<% @users.each do |user| %>
-		<!-- by not calling any methods on the user obj, ruby calls to_s which outputs nonhuman-friendly output -->
+		<!-- by not calling any methods on the user obj, like user.email, ruby calls to_s which outputs nonhuman-friendly output -->
 		<!-- to fix this we need to change the to_s method in the user model -->
 		<li><%= link_to user, [:admin, user] %></li>
 	<% end %>
